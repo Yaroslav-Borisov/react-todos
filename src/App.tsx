@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Header } from './components/header/header';
+import { Filters } from './components/filters/filters';
+import { TodoList } from './components/todo-list/todo-list';
+import { AddTodo } from './components/add-todo/add-todo';
+import { Footer } from './components/footer/footer';
+import { todos } from './mocks/todos';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="app">
+            <Header />
+            <Filters />
+            <main className="app-main">
+                <TodoList todos={todos}/>
+                <AddTodo />
+            </main>
+            <Footer todos={todos}/>
+        </div>
+    );
 }
 
 export default App;

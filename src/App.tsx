@@ -7,6 +7,7 @@ import { Footer } from './components/footer/footer';
 import { todos as mockTodos } from './mocks/todos';
 import { FilterType, Todo } from './types';
 import { Form } from './components/form/form';
+import { Empty } from './components/empty/empty';
 
 function App() {
     const [todos, setTodos] = useState(mockTodos)
@@ -72,7 +73,7 @@ function App() {
             <Header />
             <Filters filter={filter} onChange={setFilter} />
             <main className="app-main">
-                <TodoList todos={filteredTodos} onToggle={onToggle} onDelete={onDelete} />
+                {!form && todos.length === 0 ? <Empty /> : <TodoList todos={filteredTodos} onToggle={onToggle} onDelete={onDelete} />}
                 {form ? <Form closeForm={closeForm} addTodo={addTodo} /> : <AddTodo showForm={showForm}/>}
             </main>
             <Footer todos={todos} />

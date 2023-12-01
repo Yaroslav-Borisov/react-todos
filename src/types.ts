@@ -3,3 +3,9 @@ export type Todo = {
     text: string,
     completed: boolean,
 }
+
+export enum FilterType {
+    All = 'All',
+    Active = 'Active',
+    Done = 'Done'
+}

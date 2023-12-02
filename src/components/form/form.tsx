@@ -1,11 +1,11 @@
-import { useState } from "react"
+import React, { useState } from 'react';
 
 type FormProps = {
-    closeForm: (isVisible: boolean) => void
     addTodo: (text: string) => void
 }
 
-export function Form({closeForm, addTodo}: FormProps) {
+export function Form({ addTodo }: FormProps) {
+    const [isVisible, setVisible] = useState(false)
     const [formData, setFormData] = useState('')
 
     const changeHandler = (evt: React.FormEvent<HTMLInputElement>) => {
@@ -18,19 +18,31 @@ export function Form({closeForm, addTodo}: FormProps) {
         setFormData('')
     }
 
-    const closeHandler = () => {
-        closeForm(true)
+    const showFormHandler = () => {
+        setVisible(true)
     }
 
-    return (
-        <form className="add-todo__form">
-            <button className="close-button" type="button" onClick={closeHandler}>
-                <i className="bi bi-x"></i>
-            </button>
-            <div className="text-input text-input--focus">
-                <input className="input" value={formData} onChange={changeHandler}/>
-            </div>
-            <button className="button button--filled" onClick={addTodoHandler}>Add task</button>
-        </form>
-    )
+    const closeFormHandler = () => {
+        setVisible(false)
+    }
+    
+
+    return (<>
+        {isVisible ?
+            <form className="add-todo__form">
+                <button className="close-button" type="button" onClick={closeFormHandler}>
+                    <i className="bi bi-x"></i>
+                </button>
+                <div className="text-input text-input--focus">
+                    <input className="input" value={formData} onChange={changeHandler} />
+                </div>
+                <button className="button button--filled" onClick={addTodoHandler}>Add task</button>
+            </form> 
+            :
+            <section className="add-todo">
+                <button className="add-todo__show-form-button" onClick={showFormHandler}>
+                    <i className="bi bi-plus-lg"></i>
+                </button>
+            </section>}
+    </>)
 }

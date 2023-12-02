@@ -2,17 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { Header } from './components/header/header';
 import { Filters } from './components/filters/filters';
 import { TodoList } from './components/todo-list/todo-list';
-import { AddTodo } from './components/add-todo/add-todo';
 import { Footer } from './components/footer/footer';
 import { todos as mockTodos } from './mocks/todos';
 import { FilterType, Todo } from './types';
-import { Form } from './components/form/form';
 import { Empty } from './components/empty/empty';
+import { Form } from './components/form/form';
 
 function App() {
     const [todos, setTodos] = useState(mockTodos)
     const [filter, setFilter] = useState(FilterType.All)
-    const [form, setForm] = useState(false)
 
     const filteredTodos = useMemo(() => {
         switch (filter) {
@@ -47,14 +45,6 @@ function App() {
         setTodos(updatedTodos)
     }
 
-    const showForm = (isVisible: boolean) => {
-        setForm(isVisible)
-    }
-
-    const closeForm = (isVisible: boolean) => {
-        setForm(!isVisible)
-    }
-
     const addTodo = (text: string) => {
         console.log(text)
 
@@ -73,8 +63,8 @@ function App() {
             <Header />
             <Filters filter={filter} onChange={setFilter} />
             <main className="app-main">
-                {!form && todos.length === 0 ? <Empty /> : <TodoList todos={filteredTodos} onToggle={onToggle} onDelete={onDelete} />}
-                {form ? <Form closeForm={closeForm} addTodo={addTodo} /> : <AddTodo showForm={showForm}/>}
+                {todos.length === 0 ? <Empty /> : <TodoList todos={filteredTodos} onToggle={onToggle} onDelete={onDelete} />}
+                <Form addTodo={addTodo} />
             </main>
             <Footer todos={todos} />
         </div>

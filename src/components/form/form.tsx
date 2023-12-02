@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Todo } from '../../types';
 
 type FormProps = {
-    addTodo: (text: string) => void
+    addTodo: (newTodo: Todo) => void
 }
 
 export function Form({ addTodo }: FormProps) {
@@ -14,7 +15,11 @@ export function Form({ addTodo }: FormProps) {
 
     const addTodoHandler = (evt: React.FormEvent<HTMLButtonElement>) => {
         evt.preventDefault()
-        addTodo(formData)
+        const newTodo = {
+            title: formData,
+            completed: false
+        }
+        addTodo(newTodo)
         setFormData('')
     }
 

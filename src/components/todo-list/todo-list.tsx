@@ -3,8 +3,8 @@ import { TodoItem } from "../todo-item/todo-item"
 
 type TodoListProps = {
     todos: Todo[]
-    onToggle: (id: number) => void
-    onDelete: (id: number) => void
+    onToggle: (todo: Todo) => void
+    onDelete: (todo: Todo) => void
 }
 
 export function TodoList({todos, onToggle, onDelete}: TodoListProps) {
